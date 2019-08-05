@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/cookiejar"
-	"per"
 	"strings"
 )
 
@@ -106,7 +105,7 @@ func IGets(iUrl string, coo map[string]string) string {
 	client := &http.Client{tr, nil, cookieJar, 0}
 	//client := http.Client{}
 	reqID, err := http.NewRequest("GET", iUrl, nil)
-	per.CheckErr(err)
+	CheckErr(err)
 	for k, v := range coo {
 		reqID.Header.Add(k, v)
 	}
@@ -115,9 +114,9 @@ func IGets(iUrl string, coo map[string]string) string {
 	respID, err := client.Do(reqID)
 	//h,_:=json.Marshal(respID.Header)
 	//fmt.Println(string(h))
-	per.CheckErr(err)
+	CheckErr(err)
 	bodyID, err := ioutil.ReadAll(respID.Body)
-	per.CheckErr(err)
+	CheckErr(err)
 	return string(bodyID)
 }
 func StrToCookies(cookieStr string) map[string]string {
