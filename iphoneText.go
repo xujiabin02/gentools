@@ -1,11 +1,10 @@
 package common
 
 import (
-	"fmt"
 	"github.com/tidwall/sjson"
 )
 
-func IphoneText(apiUrl string, personalMobile []string, iText string) {
+func IphoneText(apiUrl string, personalMobile []string, iText string) string {
 	iData := `{
     "mobiles":[
         13683368766,
@@ -16,5 +15,6 @@ func IphoneText(apiUrl string, personalMobile []string, iText string) {
 	iData, _ = sjson.Set(iData, "mobiles", personalMobile)
 	iData, _ = sjson.Set(iData, "context", iText)
 	result := Post(apiUrl, iData)
-	fmt.Println(result)
+	//fmt.Println(result)
+	return result
 }
