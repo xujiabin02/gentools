@@ -1,4 +1,4 @@
-package per
+package common
 
 import (
 	"database/sql"
