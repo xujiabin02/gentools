@@ -7,8 +7,6 @@ import (
 func IphoneText(apiUrl string, personalMobile []string, iText string) string {
 	iData := `{
     "mobiles":[
-        13683368766,
-        13011001183
     ],
     "context":"test for alarm"
 }`
