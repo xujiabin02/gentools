@@ -20,12 +20,13 @@ func ReadFile(fileName string) string {
 	return resultReturn
 }
 func WriteFile(fileName string, content string) string {
+	statusStr := "OK"
 	var d1 = []byte(content)
 	err2 := ioutil.WriteFile(fileName, d1, 0666) //写入文件(字节数组)
 	if err2 != nil {
 		panic(err2)
 	}
-	return "OK"
+	return statusStr
 }
 
 func checkFileIsExist(filename string) bool {
