@@ -62,8 +62,29 @@ func TurnSliceToStringAddFrame(inputSlice [][]string) string {
 	//fmt.Println(tranSlice)
 	d := transposeTwoDimensionArray(tranSlice)
 	var e string
-	for _, i := range d {
-		e = e + strings.Join(i, " | ") + "\n"
+	var c int
+	for n, i := range d {
+		switch n {
+		case 0:
+			e = e + strings.Join(i, " | ") + "\n"
+			*&c = len(e)
+			e = "\n" + e
+			for j := 0; j < c; j++ {
+				e = "-" + e
+			}
+			for j := 0; j < c; j++ {
+				e += "-"
+			}
+			e += "\n"
+		case len(d) - 1:
+			e = e + strings.Join(i, " | ") + "\n"
+			for j := 0; j < c; j++ {
+				e += "-"
+			}
+			e += "\n"
+		default:
+			e = e + strings.Join(i, " | ") + "\n"
+		}
 	}
 	return e
 }
