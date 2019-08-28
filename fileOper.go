@@ -9,6 +9,9 @@ import (
 func ReadFile(fileName string) string {
 	var resultReturn string
 	//fileName := "./logconfig.json"
+	if !checkFileIsExist(fileName) {
+		WriteFile(fileName, "0")
+	}
 	if fileObj, err := os.Open(fileName); err == nil {
 		defer fileObj.Close()
 		if contents, err := ioutil.ReadAll(fileObj); err == nil {
