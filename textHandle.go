@@ -42,7 +42,11 @@ func maxLength(inputSlice []string) int {
 	return maxLen
 }
 func addNumStr(someString string, someNumber int) string {
+	exNum := strings.Count(someString, "_")
 	for i := 0; i < someNumber; i++ {
+		someString = someString + "  "
+	}
+	for i := 0; i < exNum; i++ {
 		someString = someString + " "
 	}
 	return someString

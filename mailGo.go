@@ -106,3 +106,38 @@ func sendMailUsingTLS(addr string, auth smtp.Auth, from string,
 	}
 	return c.Quit()
 }
+func MailText(sub, content, mailList, serverHost string, serverPort int, userName, passWord string) error {
+	//host := "smtp.exmail.qq.com"
+	//port := 465
+	host := serverHost
+	port := serverPort
+	toEmail := mailList
+	header := make(map[string]string)
+	header["From"] = "ai_watch" + "<" + userName + ">"
+	header["To"] = mailList
+	header["Subject"] = sub
+	header["Content-Type"] = "text/plain; charset=UTF-8"
+	body := content
+	message := ""
+	for k, v := range header {
+		message += fmt.Sprintf("%s: %s\r\n", k, v)
+	}
+	message += "\r\n" + body
+	auth := smtp.PlainAuth(
+		"",
+		userName,
+		passWord,
+		host,
+	)
+	err := sendMailUsingTLS(
+		fmt.Sprintf("%s:%d", host, port),
+		auth,
+		userName,
+		strings.Split(toEmail, ";"),
+		[]byte(message),
+	)
+	if err != nil {
+		return err
+	}
+	return nil
+}
