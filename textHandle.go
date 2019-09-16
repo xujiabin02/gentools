@@ -1,6 +1,9 @@
 package common
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 func expendSlice(someStringSlice []string, largeThan int) []string {
 	e := make([]string, largeThan)
@@ -103,4 +106,50 @@ func extractChineseNum(someStr string) int {
 		}
 	}
 	return num
+}
+func TurnSliceToHTML(inputSlice [][]string) string {
+	result := `<!-- CSS goes in the document HEAD or added to your external stylesheet -->
+<style type="text/css">
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+</style>
+
+<!-- Table goes in the document BODY -->`
+	for n, i := range inputSlice {
+		if n == 0 {
+			for _, j := range i {
+
+				result = result + fmt.Sprintf("<th>%s</th>", j)
+			}
+			result = fmt.Sprintf("<tr>%s</tr>", result)
+		} else {
+
+			for _, j := range i {
+				result = result + fmt.Sprintf("<td>%s</td>", j)
+			}
+			result = fmt.Sprintf("<tr>%s</tr>", result)
+		}
+	}
+	result = fmt.Sprintf(`<table class="gridtable">%s</table>`, result)
+	return result
 }
