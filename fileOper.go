@@ -3,7 +3,6 @@ package common
 import (
 	"io/ioutil"
 	"os"
-	"strings"
 )
 
 func ReadFile(fileName string) string {
@@ -15,7 +14,7 @@ func ReadFile(fileName string) string {
 	if fileObj, err := os.Open(fileName); err == nil {
 		defer fileObj.Close()
 		if contents, err := ioutil.ReadAll(fileObj); err == nil {
-			resultReturn = strings.Replace(string(contents), "\n", "", 1)
+			resultReturn = string(contents)
 			//fmt.Println("Use os.Open family functions and ioutil.ReadAll to read a file contents:",result)
 		}
 
