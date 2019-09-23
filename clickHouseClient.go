@@ -1,6 +1,7 @@
 package common
 
 import (
+	"github.com/tidwall/gjson"
 	"strings"
 )
 
@@ -13,4 +14,8 @@ func ClickHouseQuery(conHttp, SQL string) [][]string {
 		}
 	}
 	return resultSlice
+}
+
+func JsonClickHouseQuery(conHttp, Sql string) map[string]interface{} {
+	return gjson.Parse(Post(conHttp, Sql)).Value().(map[string]interface{})
 }
