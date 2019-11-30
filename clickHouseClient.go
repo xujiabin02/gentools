@@ -1,5 +1,7 @@
 package common
 
+//build by XuJiaBin
+
 import (
 	"github.com/tidwall/gjson"
 	"strings"
