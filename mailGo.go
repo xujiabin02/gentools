@@ -153,7 +153,7 @@ func CueMail(sub, content, mailTo, serverAddr, user, password string, tls bool) 
 		}
 		return err
 	} else if !tls {
-		auth := LoginAuth(user, password)
+		auth := myLoginAuth(user, password)
 		to := strings.Split(mailTo, ";")
 		msg := []byte(fmt.Sprintf("To: %s\r\n"+
 			"From: %s\r\n"+
@@ -176,7 +176,7 @@ type loginAuth struct {
 	username, password string
 }
 
-func LoginAuth(username, password string) smtp.Auth {
+func myLoginAuth(username, password string) smtp.Auth {
 	return &loginAuth{username, password}
 }
 func (a *loginAuth) Start(server *smtp.ServerInfo) (string, []byte, error) {
