@@ -50,7 +50,7 @@ func Mail(sub, content, mailList, serverHost string, serverPort int, userName, p
 func dial(addr string) (*smtp.Client, error) {
 	conn, err := tls.Dial("tcp", addr, nil)
 	if err != nil {
-		log.Println("Dialing Error:", err)
+		LogConsole().Error("Dialing Error:", err)
 		return nil, err
 	}
 	//分解主机端口字符串
@@ -70,7 +70,7 @@ func sendMailUsingTLS(addr string, auth smtp.Auth, from string,
 	//create smtp client
 	c, err := dial(addr)
 	if err != nil {
-		log.Println("Create smpt client error:", err)
+		LogConsole().Error("Create smpt client error:", err)
 		return err
 	}
 	defer c.Close()
