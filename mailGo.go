@@ -7,6 +7,7 @@ import (
 	"log"
 	"net"
 	"net/smtp"
+	"strconv"
 	"strings"
 )
 
@@ -140,4 +141,56 @@ func MailText(sub, content, mailList, serverHost string, serverPort int, userNam
 		return err
 	}
 	return nil
+}
+func CueMail(sub, content, mailTo, serverAddr, user, password string, tls bool) error {
+	host, port, _ := net.SplitHostPort(serverAddr)
+	nPort, _ := strconv.Atoi(port)
+	if tls {
+		err := TlsMail(sub, content, mailTo, host, nPort, user, password)
+		if err != nil {
+			fmt.Println(err)
+			return err
+		}
+		return err
+	} else if !tls {
+		auth := LoginAuth(user, password)
+		to := strings.Split(mailTo, ";")
+		msg := []byte(fmt.Sprintf("To: %s\r\n"+
+			"From: %s\r\n"+
+			"Subject: %s\r\n"+
+			"Content-Type: text/html; charset=UTF-8\r\n"+
+			"\r\n"+
+			"%s\r\n", mailTo, user, sub, content))
+		err := smtp.SendMail(serverAddr, auth, user, to, msg)
+		if err != nil {
+			//fmt.Println(err)
+			return err
+		}
+		return err
+
+	}
+	return nil
+}
+
+type loginAuth struct {
+	username, password string
+}
+
+func LoginAuth(username, password string) smtp.Auth {
+	return &loginAuth{username, password}
+}
+func (a *loginAuth) Start(server *smtp.ServerInfo) (string, []byte, error) {
+	// return "LOGIN", []byte{}, nil
+	return "LOGIN", []byte(a.username), nil
+}
+func (a *loginAuth) Next(fromServer []byte, more bool) ([]byte, error) {
+	if more {
+		switch string(fromServer) {
+		case "Username:":
+			return []byte(a.username), nil
+		case "Password:":
+			return []byte(a.password), nil
+		}
+	}
+	return nil, nil
 }
