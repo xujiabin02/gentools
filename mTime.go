@@ -22,7 +22,9 @@ type StrTime struct {
 
 func (sn *StrNow) Init() {
 	sn.OneDay = 86400
-	sn.TFormat = "2006-01-02 15:04:05"
+	if sn.TFormat == "" {
+		sn.TFormat = "2006-01-02 15:04:05"
+	}
 	sn.Unix = time.Now().Unix()
 	sn.Str = time.Unix(sn.Unix, 0).Format(sn.TFormat)
 	sn.Proper = []StrTime{
