@@ -1,4 +1,4 @@
-package common
+package com
 
 func StrCopy(inputStr string, num int) []interface{} {
 	var b []interface{}

@@ -7,6 +7,7 @@ require (
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/tidwall/gjson v1.13.0
 	github.com/tidwall/sjson v1.2.4
+	gopkg.in/yaml.v2 v2.2.8
 )
 
 require (
