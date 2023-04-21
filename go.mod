@@ -1,4 +1,4 @@
-module rushtool
+module gentools
 
 go 1.17
 
