@@ -1,4 +1,4 @@
-package rushtool
+package gentools
 
 import "github.com/astaxie/beego/logs"
 

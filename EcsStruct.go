@@ -1,4 +1,4 @@
-package rushtool
+package gentools
 
 import "github.com/aliyun/alibaba-cloud-sdk-go/services/ecs"
 

@@ -1,4 +1,4 @@
-package rushtool
+package gentools
 
 import (
 	"bytes"

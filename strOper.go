@@ -1,4 +1,4 @@
-package rushtool
+package gentools
 
 func StrCopy(inputStr string, num int) []interface{} {
 	var b []interface{}
