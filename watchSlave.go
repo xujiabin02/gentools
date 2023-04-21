@@ -1,4 +1,4 @@
-package com
+package rushtool
 
 import (
 	"database/sql"
