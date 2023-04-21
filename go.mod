@@ -1,4 +1,4 @@
-module gentools
+module github.com/xujiabin02/gentools
 
 go 1.20
 
